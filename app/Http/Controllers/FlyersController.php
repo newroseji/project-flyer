@@ -20,7 +20,8 @@ class FlyersController extends Controller {
     public function index()
     {
         $flyers = Flyer::all();
-        return view('flyer.index',compact('flyers'));
+
+        return view('flyer.index', compact('flyers'));
     }
 
     /**
@@ -44,5 +45,13 @@ class FlyersController extends Controller {
     {
 
         return view('flyer.create');
+    }
+
+    public function show($zip, $street)
+    {
+        $flyer= Flyer::locatedAt($zip, $street)->first();
+
+        return view('flyer.show',compact('flyer'));
+
     }
 }

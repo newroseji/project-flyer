@@ -29,4 +29,6 @@
 Route::get('dashboard','UsersController@dashboard');
 Route::get('user/profile','UsersController@profile');
 
+
 Route::resource('flyers','FlyersController');
+Route::get('flyers/{zip}/{street}','FlyersController@show');

@@ -14,7 +14,7 @@
             <ul class="list-group">
                 @foreach($flyers as $flyer)
                     <li class="list-group-item">
-                        {{$flyer->street}}, {{$flyer->city}}, {{$flyer->zip}} {{$flyer->state}}
+                        <a href="flyers/{{$flyer->zip}}/{{$flyer->street}}">{{$flyer->street}}, {{$flyer->city}}, {{$flyer->zip}} {{$flyer->state}}</a>
                 @endforeach
             </ul>
         </div>

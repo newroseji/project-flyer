@@ -5,8 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Flyer extends Model
-{
+class Flyer extends Model {
 
 
     protected $fillable = [
@@ -23,19 +22,42 @@ class Flyer extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function photos(){
+    public function photos()
+    {
         return $this->hasMany('App\Photo');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public static function boot(){
+
+    public function getPriceAttribute($price){
+     return '$' . number_format($price);
+    }
+    /**
+     * @param $query
+     * @param $zip
+     * @param $street
+     * @return mixed
+     */
+    public function scopeLocatedAt($query, $zip, $street)
+    {
+        $street = str_replace('-', ' ', $street);
+
+        return $query->where(compact('zip', 'street'));
+    }
+
+    /*
+    public static function boot()
+    {
         parent::boot();
 
-        static::creating(function($flyer){
-           $flyer->user_id=Auth::user()->id;
+        static::creating(function ($flyer)
+        {
+            $flyer->user_id = Auth::user()->id;
         });
     }
+    */
 }
