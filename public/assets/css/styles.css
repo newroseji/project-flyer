@@ -1,0 +1,45 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-top: 70px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+#myCarousel {
+    margin-top: -70px;
+}
+
+footer {
+
+    color: #ffffff;
+
+    text-align: center;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+    font-size: smaller;
+    padding-top: 10px;
+     position: absolute;
+    bottom: 0;
+     width: 100%;
+
+    /* Set the fixed height of the footer here */
+    height: 70px;
+    /*
+    background-color: beige;
+    */
+
+}
+
+.loginBox {
+    max-width: 440px;
+    border: 1px solid #8c8c8c;
+    margin-top: 30px;
+}
+
+.panel-heading-custom{
+    display: flex;
+    justify-content: space-between;
+}
