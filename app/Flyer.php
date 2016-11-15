@@ -41,9 +41,9 @@
 		 *
 		 * @return string
 		 */
-		public function getPriceAttribute($price) {
-			return '$' . number_format($price);
-		}
+/*		public function getPriceAttribute($price) {
+			return number_format($price);
+		}*/
 
 		/**
 		 * @param Photo $photo
