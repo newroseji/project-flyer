@@ -1,63 +1,89 @@
 <?php
 
-namespace App;
+	namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+	use Illuminate\Database\Eloquent\Model;
+	use Illuminate\Support\Facades\Auth;
 
-class Flyer extends Model {
-
-
-    protected $fillable = [
-        'street',
-        'city',
-        'zip',
-        'state',
-        'country',
-        'price',
-        'description',
-    ];
+	class Flyer extends Model
+	{
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function photos()
-    {
-        return $this->hasMany('App\Photo');
-    }
+		protected $fillable = [
+			'street',
+			'city',
+			'zip',
+			'state',
+			'country',
+			'price',
+			'description',
+		];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+		/**
+		 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+		 */
+		public function owner() {
+			return $this->belongsTo('App\user', 'user_id');
+		}
+
+		/**
+		 * @param User $user
+		 *
+		 * @return bool
+		 */
+		public function ownedBy(User $user) {
+
+			return $this->user_id == $user->id;
+		}
+
+		/**
+		 * @param $price
+		 *
+		 * @return string
+		 */
+		public function getPriceAttribute($price) {
+			return '$' . number_format($price);
+		}
+
+		/**
+		 * @param Photo $photo
+		 *
+		 * @return Model
+		 */
+		public function addPhoto(Photo $photo) {
+			return $this->photos()->save($photo);
+		}
 
 
-    public function getPriceAttribute($price){
-     return '$' . number_format($price);
-    }
-    /**
-     * @param $query
-     * @param $zip
-     * @param $street
-     * @return mixed
-     */
-    public function scopeLocatedAt($query, $zip, $street)
-    {
-        $street = str_replace('-', ' ', $street);
+		/**
+		 * @param $zip
+		 * @param $street
+		 *
+		 * @return mixed
+		 */
+		public static function locatedAt($zip, $street) {
+			$street = str_replace('-', ' ', $street);
 
-        return $query->where(compact('zip', 'street'));
-    }
+			return static::where(compact('zip', 'street'))->firstOrFail();
+		}
 
-    /*
-    public static function boot()
-    {
-        parent::boot();
+		/**
+		 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+		 */
+		public function photos() {
+			return $this->hasMany('App\Photo');
+		}
 
-        static::creating(function ($flyer)
-        {
-            $flyer->user_id = Auth::user()->id;
-        });
-    }
-    */
-}
+
+		/**
+		 * Create user_id while creating the User record.
+		 */
+		public static function boot() {
+			parent::boot();
+
+			static::creating(function ($flyer) {
+				$flyer->user_id = Auth::user()->id;
+			});
+		}
+
+	}

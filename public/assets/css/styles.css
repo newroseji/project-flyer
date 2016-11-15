@@ -32,6 +32,24 @@ footer {
     */
 
 }
+.description {
+    height:450px;
+    overflow:auto;
+}
+
+.photo-locker{
+    height:400px;
+    overflow:auto;
+    margin-bottom: 10px;
+    padding-left:30px;
+
+}
+
+#addPhotosForm{
+    max-width:95%;
+margin-left:15px;
+}
+
 
 .loginBox {
     max-width: 440px;

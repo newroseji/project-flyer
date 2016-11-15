@@ -1,57 +1,98 @@
 <?php
 
-namespace App\Http\Controllers;
+	namespace App\Http\Controllers;
 
 
-use App\Flyer;
-use App\Http\Requests;
-use App\Http\Requests\FlyerRequest;
+	use App\Flyer;
+	use App\Photo;
+	use App\Http\Requests;
+	use Illuminate\Http\Request;
+	use Illuminate\Http\UploadedFile;
+	use App\Http\Requests\FlyerRequest;
+	use App\Http\Controllers\Traits\AuthorizesUsers;
 
-class FlyersController extends Controller {
+	class FlyersController extends Controller
+	{
 
-    /**
-     * HousesController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+		use AuthorizesUsers;
+		/**
+		 * HousesController constructor.
+		 */
+		public function __construct() {
+			$this->middleware('auth', ["except" => ['index', 'show']]);
+		}
 
-    public function index()
-    {
-        $flyers = Flyer::all();
+		public function index() {
 
-        return view('flyer.index', compact('flyers'));
-    }
+			$flyers = Flyer::paginate(10);
 
-    /**
-     * @param FlyerRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(FlyerRequest $request)
-    {
+			return view('flyer.index', compact('flyers'));
+		}
 
-        Flyer::create($request->all());
+		/**
+		 * @param FlyerRequest $request
+		 *
+		 * @return \Illuminate\Http\RedirectResponse
+		 */
+		public function store(FlyerRequest $request) {
 
-        flash()->overlay("Success!", "Flyer created successfully.");
+			$flyer=Flyer::create($request->all());
 
-        return redirect()->back();
-    }
+			flash()->overlay("Success!", "Flyer created successfully.");
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create()
-    {
+			return redirect('/flyers/' . $flyer->zip . '/' . $flyer->street);
+		}
 
-        return view('flyer.create');
-    }
+		/**
+		 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+		 */
+		public function create() {
 
-    public function show($zip, $street)
-    {
-        $flyer= Flyer::locatedAt($zip, $street)->first();
+			return view('flyer.create');
+		}
 
-        return view('flyer.show',compact('flyer'));
+		/**
+		 * @param $zip
+		 * @param $street
+		 *
+		 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+		 */
+		public function show($zip, $street) {
 
-    }
-}
+			$flyer = Flyer::locatedAt($zip, $street);
+
+			return view('flyer.show', compact('flyer'));
+
+		}
+
+
+		/**
+		 * @param         $zip
+		 * @param         $street
+		 * @param Request $request
+		 *
+		 * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\Response
+		 */
+		public function addPhoto($zip, $street, Request $request) {
+
+			$this->validate($request,
+				[
+					'photo' => 'required|mimes:jpg,jpeg,png,bmp'
+				]);
+
+
+			if ( ! $this->userCreatedFlyer($request)){
+				return $this->unauthorized($request);
+			}
+
+
+			$photo = Photo::fromFile($request->file('photo'));
+
+			Flyer::locatedAt($zip, $street)->addPhoto($photo);
+
+
+		}
+
+
+
+	}

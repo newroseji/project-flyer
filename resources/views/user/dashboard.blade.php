@@ -17,6 +17,9 @@
                         <a href="flyers/{{$flyer->zip}}/{{$flyer->street}}">{{$flyer->street}}, {{$flyer->city}}, {{$flyer->zip}} {{$flyer->state}}</a>
                 @endforeach
             </ul>
+            <div class="text-center">
+                {!! $flyers->appends(Request::except('page'))->render() !!}
+            </div>
         </div>
     </div>
 @stop

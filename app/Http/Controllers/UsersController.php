@@ -21,7 +21,8 @@ class UsersController extends Controller {
 
     public function dashboard()
     {
-        $flyers = Flyer::where('user_id',\Auth::user()->id)->get();
+        $flyers = Flyer::where('user_id',\Auth::user()->id)->paginate(3);
+
         return view('user.dashboard',compact('flyers'));
     }
 

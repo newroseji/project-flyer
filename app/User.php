@@ -67,4 +67,9 @@ class User extends Authenticatable
 	public function flyers(){
 		return $this->hasMany(Flyer::class);
 	}
+
+	public function owns($relation){
+
+		return $relation->user_id == $this->id;
+	}
 }
