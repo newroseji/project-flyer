@@ -14,6 +14,7 @@
     <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <link href="/assets/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="/assets/lity.2.2.0/lity.min.css" rel="stylesheet">
 
     <script src="/assets/js/ie-emulation-modes-warning.js"></script>
 
@@ -25,6 +26,8 @@
 
     <link href="/assets/css/carousel.css" rel="stylesheet">
     <link href="/assets/css/styles.css" rel="stylesheet">
+
+    @yield("styles")
 </head>
 <body>
 <div class="navbar-wrapper">
@@ -45,7 +48,6 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/">Home</a></li>
                         <li><a href="/flyers">Flyers</a></li>
-                        <li><a href="/contact">Contact</a></li>
 
 
 
@@ -62,7 +64,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->firstname }}
                                     {{ Auth::user()->middlename }}
-                                    {{ Auth::user()->lastname }}<span class="caret"></span>
+                                    {{ Auth::user()->lastname }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
@@ -113,6 +115,9 @@
 
 <script src="/assets/sweetalert2/dist/sweetalert2.min.js"></script>
 
+<script src="/assets/lity.2.2.0/lity.min.js"></script>
+
+@yield("scripts")
 @include("flashes._sweetflash")
 </body>
 </html>

@@ -21,14 +21,20 @@
 	Route::post('register', 'RegistrationController@postRegister');
 	Route::get('register/confirm/{token}', 'RegistrationController@confirmEmail');
 
-	Route::get('login','SessionsController@login');
-	Route::post('login','SessionsController@postLogin');
+	Route::get('login', 'SessionsController@login');
+	Route::post('login', 'SessionsController@postLogin');
 
-	Route::get('logout','SessionsController@logout');
+	Route::get('logout', 'SessionsController@logout');
 
-Route::get('dashboard','UsersController@dashboard');
-Route::get('user/profile','UsersController@profile');
+	Route::get('dashboard', 'UsersController@dashboard');
+	Route::get('user/profile', 'UsersController@profile');
 
 
-Route::resource('flyers','FlyersController');
-Route::get('flyers/{zip}/{street}','FlyersController@show');
+	Route::get('flyers', 'FlyersController@index');
+	Route::post('flyers', 'FlyersController@store');
+	Route::get('flyers/create', 'FlyersController@create');
+	Route::get('flyers/{zip}/{street}', 'FlyersController@show');
+
+	Route::post('flyers/{zip}/{street}/photos', ['as'=>'store_photo_path','uses'=>'FlyersController@addPhoto']);
+
+	Route::delete('photos/{id}','PhotosController@destroy');

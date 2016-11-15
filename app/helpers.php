@@ -14,3 +14,30 @@ function flash($title = null, $message = null)
     return $flash->info($title, $message);
 
 }
+
+function link_to($body, $path, $type){
+
+	$csrf = csrf_field();
+
+
+	if ( is_object($path)){
+
+		$action=$path->getTable();
+
+		if (in_array($type,['PUT','PATH','DELETE'])){
+			$action .= '/' . $path->getKey();
+		}
+	}
+	else{
+		$action = $path;
+	}
+
+	return <<<EOT
+<form method="POST" action="{$path}">
+<input type='hidden' name='_method' value='{$type}'>
+$csrf
+<button class="glyphicon glyphicon-trash" type="submit" title="Delete"></button>
+</form>
+EOT;
+
+}

@@ -24,7 +24,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker)
         'state'          => $faker->state,
         'country'        => 'US',
         'verified'       => 1,
-
         'email'          => $faker->safeEmail,
         'password'       => bcrypt(str_random(10)),
         'verified'       => true,
@@ -42,7 +41,7 @@ $factory->define(App\Flyer::class, function (Faker\Generator $faker)
         'state'       => $faker->state,
         'country'     => 'US',
         'price'       => $faker->numberBetween(10000, 500000),
-        'description' => $faker->paragraph(5,3),
+        'description' => $faker->paragraphs(5,3),
         'user_id'     => factory('App\User')->create()->id
     ];
 });
