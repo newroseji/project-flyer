@@ -9,9 +9,12 @@
 
     <br/>
     <div class="col-md-3">
-        <h3>{!! $flyer->street !!}</h3>
+        <h3>{{ $flyer->street }}</h3>
+        @if ( \Auth::user() && \Auth::user()->owns($flyer))
+            <a href="/flyers/{{$flyer->id}}/edit" class="pull-right" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+        @endif
 
-        <h4>{!! $flyer->price !!}</h4>
+        <h4>${{number_format($flyer->price) }}</h4>
         <hr>
 
 
@@ -23,35 +26,39 @@
 
         <div class="row">
             <div class="col-md-12 photo-locker">
-            @foreach($flyer->photos->chunk(4) as $set)
-                <div class="row">
+                @foreach($flyer->photos->chunk(4) as $set)
+                    <div class="row">
 
-                    @foreach($set as $photo)
-                        <div class="col-md-3">
-                        {!! link_to('Delete',"/photos/{$photo->id}",'DELETE') !!}
+                        @foreach($set as $photo)
+                            <div class="col-md-3">
+                                @if ( \Auth::user() && \Auth::user()->owns($flyer))
+                                    {!! link_to('Delete',"/photos/{$photo->id}",'DELETE') !!}
+                                @endif
 
-                        <a href="/{{$photo->photo_path}}" data-lity>
-                            <img src="/{{$photo->thumbnail_path}}" alt="{{$photo->caption}}"/>
-                        </a>
-                        </div>
-                    @endforeach
+                                <a href="/{{$photo->photo_path}}" data-lity>
+                                    <img src="/{{$photo->thumbnail_path}}" alt="{{$photo->caption}}"/>
+                                </a>
 
-                </div>
-            @endforeach
+                            </div>
+                        @endforeach
+
+                    </div>
+                    <hr/>
+                @endforeach
             </div>
         </div>
 
         @if ( \Auth::user() && \Auth::user()->owns($flyer))
-        <div class="row">
-            <form id="addPhotosForm"
+            <div class="row">
+                <form id="addPhotosForm"
 
-                  action="{{ route('store_photo_path',[$flyer->zip,$flyer->street]) }}"
-                  class="dropzone">
-                {!! csrf_field() !!}
-            </form>
-        </div>
+                      action="{{ route('store_photo_path',[$flyer->zip,$flyer->street]) }}"
+                      class="dropzone">
+                    {!! csrf_field() !!}
+                </form>
+            </div>
 
-            @endif
+        @endif
     </div>
 
 

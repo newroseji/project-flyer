@@ -15,6 +15,7 @@
 	{
 
 		use AuthorizesUsers;
+
 		/**
 		 * HousesController constructor.
 		 */
@@ -36,7 +37,7 @@
 		 */
 		public function store(FlyerRequest $request) {
 
-			$flyer=Flyer::create($request->all());
+			$flyer = Flyer::create($request->all());
 
 			flash()->overlay("Success!", "Flyer created successfully.");
 
@@ -65,6 +66,31 @@
 
 		}
 
+		public function edit($id) {
+
+			$flyer = Flyer::findOrFail($id);
+
+			return view('flyer.edit', compact('flyer'));
+		}
+
+		public function update(FlyerRequest $request) {
+
+			$flyer = Flyer::findOrFail($request->id);
+
+			$flyer->street = $request->street;
+			$flyer->city = $request->city;
+			$flyer->zip = $request->zip;
+			$flyer->state = $request->state;
+			$flyer->country = $request->country;
+			$flyer->price = $request->price;
+			$flyer->description = $request->description;
+			$flyer->save();
+
+			flash()->overlay("Success!", "Flyer updateed successfully.");
+
+			return redirect('/flyers/' . $flyer->zip . '/' . $flyer->street);
+
+		}
 
 		/**
 		 * @param         $zip
@@ -81,7 +107,7 @@
 				]);
 
 
-			if ( ! $this->userCreatedFlyer($request)){
+			if (! $this->userCreatedFlyer($request)) {
 				return $this->unauthorized($request);
 			}
 
@@ -92,7 +118,6 @@
 
 
 		}
-
 
 
 	}

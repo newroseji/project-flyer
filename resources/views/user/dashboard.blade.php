@@ -6,7 +6,7 @@
         <div class="panel-heading">
 
             <div class="panel-heading-custom">
-                <h3>Flyers</h3>
+                <h3>My Flyers</h3>
                 <h3><a href="/flyers/create"> <i class="glyphicon glyphicon-plus-sign"></i> </a></h3>
             </div>
         </div>

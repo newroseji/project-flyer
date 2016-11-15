@@ -28,7 +28,7 @@
 					'state'     => 'max:2',
 					'zip'       => 'max:55',
 					'country'   => 'max:50',
-					'email'     => 'required|email|unique:users',
+					'email'     => 'required|email',
 					'password'  => 'required|min:6|max:50|confirmed',
 					'password_confirmation'=>'required|min:6|max:50'
 

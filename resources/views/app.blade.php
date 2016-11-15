@@ -69,20 +69,20 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="/dashboard">
-                                            <i class="fa fa-btn fa-user"></i>Dashboard
+                                            <i class="glyphicon glyphicon-dashboard"></i> Dashboard
                                         </a></li>
                                     <li role="presentation" class="divider"></li>
                                     <li>
 
 
-                                        <a href="/user/profile">
-                                            <i class="fa fa-btn fa-user"></i>Profile
+                                        <a href="/user/profile/{{Auth::user()->id}}">
+                                            <i class="glyphicon glyphicon-user"></i> Profile
                                         </a>
                                     </li>
                                     <li role="presentation" class="divider"></li>
 
                                     <li>
-                                        <a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a>
+                                        <a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
                                     </li>
                                 </ul>
                             </li>

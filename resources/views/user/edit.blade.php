@@ -4,19 +4,20 @@
 @section('content')
 
     <div class="container col-md-10 col-md-offset-1">
-        <h1>Register</h1>
+        <h1>Update</h1>
 
 
-        <form action="/register" method="POST">
+        <form action="/user/update" method="POST">
 
             {!! csrf_field()!!}
 
+            <input type="hidden" name="id" value="{{$user->id}}">
             <div class="row">
                 <!-- Firstname Form Input -->
                 <div class="form-group {{ $errors->has('firstname') ? ' has-error' : '' }} col-md-4">
                     <label for="firstname">First Name:</label> <span class="required">*</span>
                     <input type="text" name="firstname" id="firstname" placeholder="First name" class="form-control"
-                           value="{{old('firstname')}}">
+                           value="{{$user->firstname}}">
                     @if ($errors->has('firstname'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('firstname') }}</strong>
@@ -28,7 +29,7 @@
                 <div class="form-group {{ $errors->has('middlename') ? ' has-error' : '' }}  col-md-4">
                     <label for="middlename">Middle Name:</label>
                     <input type="text" name="middlename" id="middlename" placeholder="Middle name" class="form-control"
-                           value="{{old('middlename')}}">
+                           value="{{$user->middlename}}">
                     @if ($errors->has('middlename'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('middlename') }}</strong>
@@ -40,7 +41,7 @@
                 <div class="form-group {{ $errors->has('lastname') ? ' has-error' : '' }}  col-md-4">
                     <label for="lastname">Last Name:</label> <span class="required">*</span>
                     <input type="text" name="lastname" id="lastname" placeholder="Last name" class="form-control"
-                           value="{{old('lastname')}}">
+                           value="{{$user->lastname}}">
                     @if ($errors->has('lastname'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('lastname') }}</strong>
@@ -50,15 +51,9 @@
             </div>
             <div class="row">
                 <!-- Username Form Input -->
-                <div class="form-group {{ $errors->has('username') ? ' has-error' : '' }}  col-md-4">
+                <div class="form-group col-md-4">
                     <label for="username">Username:</label> <span class="required">*</span>
-                    <input type="text" name="username" id="username" placeholder="Username" class="form-control"
-                           value="{{old('username')}}">
-                    @if ($errors->has('username'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('username') }}</strong>
-                                    </span>
-                    @endif
+                    <span class="form-control">{{$user->username}}</span>
                 </div>
 
                 <!-- Email Form Input -->
@@ -67,7 +62,7 @@
                     <div class="input-group">
                         <span class="input-group-addon">@</span>
                         <input type="email" name="email" id="email" placeholder="Email address" class="form-control"
-                               value="{{old('email')}}">
+                               value="{{$user->email}}">
                     </div>
                     @if ($errors->has('email'))
                         <span class="help-block">
@@ -81,7 +76,7 @@
                 <div class="form-group {{ $errors->has('address1') ? ' has-error' : '' }} col-md-4">
                     <label for="address1">Address1:</label>
                     <input type="text" name="address1" id="address1" placeholder="Street Address" class="form-control"
-                           value="{{old('address1')}}">
+                           value="{{$user->address1}}">
                     @if ($errors->has('address1'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('address1') }}</strong>
@@ -93,7 +88,7 @@
                 <div class="form-group {{ $errors->has('address2') ? ' has-error' : '' }} col-md-4">
                     <label for="address2">Address2:</label>
                     <input type="text" name="address2" id="address2" placeholder="Apt/Suite" class="form-control"
-                           value="{{old('address2')}}">
+                           value="{{$user->address2}}">
                     @if ($errors->has('address2'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('address2') }}</strong>
@@ -105,7 +100,7 @@
                 <div class="form-group {{ $errors->has('city') ? ' has-error' : '' }} col-md-4">
                     <label for="city">City:</label>
                     <input type="text" name="city" id="city" placeholder="City" class="form-control"
-                           value="{{old('city')}}">
+                           value="{{$user->city}}">
                     @if ($errors->has('city'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('city') }}</strong>
@@ -124,7 +119,7 @@
                         <option value="">Choose Country</option>
                         @foreach($countries::all() as $code=>$country)
                             <option value="{{$code}}"
-                                    @if($code=='US')
+                                    @if($code==$user->country)
                                     selected="selected"
                                     @endif
                             >{{$country}}</option>
@@ -147,12 +142,16 @@
                             class="form-control">
                         <option value="">Choose State</option>
                         @foreach($states::all() as $code=>$state)
-                            <option value="{{$code}}">{{$state}}</option>
+                            <option
+                                    @if ($code==$user->state)
+                                            selected="selected"
+                                    @endif
+                                    value="{{$code}}">{{$state}}</option>
                         @endforeach
 
                     </select>
 
-                    @if ($errors->has('email'))
+                    @if ($errors->has('state'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('state') }}</strong>
                                     </span>
@@ -162,7 +161,7 @@
                 <div class="form-group {{ $errors->has('zip') ? ' has-error' : '' }} col-md-4">
                     <label for="zip">Zip:</label>
                     <input type="text" name="zip" id="zip" placeholder="Zipcode" class="form-control"
-                           value="{{old('zip')}}">
+                           value="{{$user->zip}}">
                     @if ($errors->has('zip'))
                         <span class="help-block">
                                         <strong>{{ $errors->first('zip') }}</strong>
@@ -171,38 +170,13 @@
                 </div>
             </div>
 
-            <div class="row">
 
-                <!-- Password Form Input -->
-                <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }} col-md-4">
-                    <label for="password">Password:</label> <span class="required">*</span>
-                    <input type="password" name="password" id="password" placeholder="Password" class="form-control"
-                           value="{{old('password')}}">
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                    @endif
-                </div>
-
-                <!-- Confirm password Form Input -->
-                <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }} col-md-4">
-                    <label for="password_confirmation">Confirm password:</label> <span class="required">*</span>
-                    <input type="password" name="password_confirmation" placeholder="Password confirmation"
-                           id="password_confirmation" class="form-control" value="{{old('password_confirmation')}}">
-                    @if ($errors->has('password_confirmation'))
-                        <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                    @endif
-                </div>
-            </div>
             <div class="row">
                 <span class="col-md-12 caption text-center">Asterisk(*) are required fields.</span>
             </div>
             <div class="row">
                 <div class="form-group col-md-12">
-                    <button type="submit" class="btn btn-primary btn-wide">Register</button>&nbsp;
+                    <button type="submit" class="btn btn-primary btn-wide"><i class="glyphicon glyphicon-save"></i> Update</button>&nbsp;
                     <a href="{{ URL::previous() }}" class="text-danger" title="Cancel">cancel</a>
                 </div>
 

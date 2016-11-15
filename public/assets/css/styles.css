@@ -21,9 +21,9 @@ footer {
     font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
     font-size: smaller;
     padding-top: 10px;
-     position: absolute;
+    position: absolute;
     bottom: 0;
-     width: 100%;
+    width: 100%;
 
     /* Set the fixed height of the footer here */
     height: 70px;
@@ -32,24 +32,31 @@ footer {
     */
 
 }
+
 .description {
-    height:450px;
-    overflow:auto;
+    height: 450px;
+    overflow: auto;
 }
 
-.photo-locker{
-    height:400px;
-    overflow:auto;
+.photo-locker {
+
     margin-bottom: 10px;
-    padding-left:30px;
+    padding-left: 30px;
+
+
+}
+.photo-locker-photo{
+    border:1px solid green;
+    padding:10px;
+    margin:10px;
+    max-width: 200px;
 
 }
 
-#addPhotosForm{
-    max-width:95%;
-margin-left:15px;
-}
+#addPhotosForm {
 
+    margin-left: 30px;
+}
 
 .loginBox {
     max-width: 440px;
@@ -57,7 +64,7 @@ margin-left:15px;
     margin-top: 30px;
 }
 
-.panel-heading-custom{
+.panel-heading-custom {
     display: flex;
     justify-content: space-between;
 }

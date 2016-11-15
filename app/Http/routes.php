@@ -27,13 +27,22 @@
 	Route::get('logout', 'SessionsController@logout');
 
 	Route::get('dashboard', 'UsersController@dashboard');
-	Route::get('user/profile', 'UsersController@profile');
-
+	Route::get('user/profile/{user}', 'UsersController@profile');
+	Route::get('user/edit/{user}', 'UsersController@edit');
+	Route::post('user/update', 'UsersController@update');
 
 	Route::get('flyers', 'FlyersController@index');
-	Route::post('flyers', 'FlyersController@store');
+
 	Route::get('flyers/create', 'FlyersController@create');
+	Route::post('flyers', 'FlyersController@store');
+
+	Route::get('flyers/{id}/edit', 'FlyersController@edit');
+
 	Route::get('flyers/{zip}/{street}', 'FlyersController@show');
+
+
+	Route::post('flyers/update', 'FlyersController@update');
+
 
 	Route::post('flyers/{zip}/{street}/photos', ['as'=>'store_photo_path','uses'=>'FlyersController@addPhoto']);
 
