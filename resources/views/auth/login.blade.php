@@ -1,4 +1,5 @@
 @extends('app')
+@section('page-title','Login page')
 @section('content')
 
     <div class="row margin-top-20">

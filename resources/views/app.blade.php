@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Project Flyer">
+
     <meta name="author" content="Niraj Byanjankar">
     <link rel="icon" href="favicon.ico">
-    <title>Project Flyer</title>
+
+    <meta name="description" content="Project Flyer is the Laravel based web application to keep track of Flyers."/>
+    <link rel="canonical" href="http://www.projectflyer.com" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Project Flyer" />
+    <meta property="og:description" content="" />
+    <meta property="og:url" content="http://www.projectflyer.com" />
+    <meta property="og:site_name" content="Project Flyer" />
+    <meta property="og:image" content="http://www.projectflyer.com" />
+
+    <title>@yield('page-title') - Project Flyer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -33,64 +44,7 @@
 <div class="navbar-wrapper">
     <div class="container">
 
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">Project Flyer</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li><a href="/flyers">Flyers</a></li>
-
-
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->firstname }}
-                                    {{ Auth::user()->middlename }}
-                                    {{ Auth::user()->lastname }} <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="/dashboard">
-                                            <i class="glyphicon glyphicon-dashboard"></i> Dashboard
-                                        </a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li>
-
-
-                                        <a href="/user/profile/{{Auth::user()->id}}">
-                                            <i class="glyphicon glyphicon-user"></i> Profile
-                                        </a>
-                                    </li>
-                                    <li role="presentation" class="divider"></li>
-
-                                    <li>
-                                        <a href="{{ url('/logout') }}"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        @include("headers._dynav")
 
     </div>
 </div>

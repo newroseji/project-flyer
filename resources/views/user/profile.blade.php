@@ -1,6 +1,7 @@
 @inject('countries','App\Http\Utilities\Country')
 @inject('states','App\Http\Utilities\State')
 @extends('app')
+@section('page-title','User Profile')
 @section('content')
     <br/>
     <div class="container col-md-10 col-md-offset-1">

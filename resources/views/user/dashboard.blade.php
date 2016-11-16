@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('page-title','User Dashboard')
 @section('content')
     <h2>Dashboard</h2>
 

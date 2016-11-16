@@ -1,6 +1,7 @@
 @inject('countries','App\Http\Utilities\Country')
 @inject('states','App\Http\Utilities\State')
 @extends('app')
+@section('page-title','Create a new flyer')
 @section('content')
 
     <div class="row margin-top-20">

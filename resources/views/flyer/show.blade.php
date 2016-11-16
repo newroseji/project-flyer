@@ -1,7 +1,7 @@
 @inject('countries','App\Http\Utilities\Country')
 @inject('states','App\Http\Utilities\State')
 @extends('app')
-
+@section('page-title','Show Flyer')
 @section("styles")
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css" rel="stylesheet">
 @stop

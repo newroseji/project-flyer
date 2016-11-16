@@ -20,7 +20,7 @@
 		 * HousesController constructor.
 		 */
 		public function __construct() {
-			$this->middleware('auth', ["except" => ['index', 'show']]);
+			$this->middleware('auth', ["except" => ['index', 'show', 'search']]);
 		}
 
 		public function index() {
@@ -120,6 +120,112 @@
 				'photo_path'     => $photo->photo_path,
 				'thumbnail_path' => $photo->thumbnail_path
 			]);
+
+		}
+
+
+		/**
+		 * @param Request $request
+		 *
+		 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+		 */
+		public function search(Request $request) {
+
+			$key = $request->input('q');
+
+			$container = array(
+				'key'     => $key,
+				'results' => array()
+			);
+			$keys = explode(" ", $key);
+
+			foreach ($keys as $k => $key):
+				if (Flyer::where('street', 'like', '%' . $key . '%')->exists()) {
+					$contain = Flyer::where('street', 'like', '%' . $key . '%')->get()->toArray();
+
+					if (count($contain) > 1) {
+
+						foreach ($contain as $kk => $vv) {
+
+							$container['results'][] = $vv;
+						}
+					} else {
+						$container['results'][] = $contain[0];
+					}
+				}
+				if (Flyer::where('city', 'like', '%' . $key . '%')->exists()) {
+					$contain = Flyer::where('city', 'like', '%' . $key . '%')->get()->toArray();
+
+					if (count($contain) > 1) {
+
+						foreach ($contain as $kk => $vv) {
+
+							$container['results'][] = $vv;
+						}
+					} else {
+						$container['results'][] = $contain[0];
+					}
+
+				}
+				if (Flyer::where('zip', 'like', '%' . $key . '%')->exists()) {
+					$contain =  Flyer::where('zip', 'like', '%' . $key . '%')->get()->toArray();
+
+					if (count($contain) > 1) {
+
+						foreach ($contain as $kk => $vv) {
+
+							$container['results'][] = $vv;
+						}
+					} else {
+						$container['results'][] = $contain[0];
+					}
+				}
+				if (Flyer::where('country', 'like', '%' . $key . '%')->exists()) {
+					$contain = Flyer::where('country', 'like', '%' . $key . '%')->get()->toArray();
+					if (count($contain) > 1) {
+
+						foreach ($contain as $kk => $vv) {
+
+							$container['results'][] = $vv;
+						}
+					} else {
+						$container['results'][] = $contain[0];
+					}
+				}
+				if (Flyer::where('country', 'like', '%' . $key . '%')->exists()) {
+					$contain =  Flyer::where('country', 'like', '%' . $key . '%')->get()->toArray();
+					if (count($contain) > 1) {
+
+						foreach ($contain as $kk => $vv) {
+
+							$container['results'][] = $vv;
+						}
+					} else {
+						$container['results'][] = $contain[0];
+					}
+				}
+				if (Flyer::where('description', 'like', '%' . $key . '%')->exists()) {
+					$contain =  Flyer::where('description', 'like', '%' . $key . '%')->get()->toArray();
+					if (count($contain) > 1) {
+
+						foreach ($contain as $kk => $vv) {
+
+							$container['results'][] = $vv;
+						}
+					} else {
+						$container['results'][] = $contain[0];
+					}
+				}
+			endforeach;
+
+			$uniq = array();
+			foreach($container['results'] as $k=>$v) if(!isset($uniq[$v['street']])) $uniq[$v['street']] = $v;
+			$uniq = array_values($uniq);
+
+			$container['results']= $uniq;
+			//dd($container);
+
+			return view('pages.search', compact('container'));
 
 		}
 

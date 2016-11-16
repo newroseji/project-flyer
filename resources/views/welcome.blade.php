@@ -1,4 +1,5 @@
 @extends('app')
+@section('page-title','Welcome')
 @section('carousel')
     <!-- Carousel
     ================================================== -->

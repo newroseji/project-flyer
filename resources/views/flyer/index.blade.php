@@ -1,4 +1,5 @@
 @extends('app')
+@section('page-title','List of Flyers')
 @section('content')
 
 
@@ -10,7 +11,7 @@
                 <h3><a href="/flyers/create"> <i class="glyphicon glyphicon-plus-sign"></i> </a></h3>
             </div>
         </div>
-        <div class="panel-body">
+        <div class="panel-bdy">
             @if(count($flyers)>0)
 
                 <ul class="list-group">
@@ -25,6 +26,7 @@
                     @endforeach
                 </ul>
 
+            
                 <div class="text-center">
                     {!! $flyers->appends(Request::except('page'))->render() !!}
                 </div>
