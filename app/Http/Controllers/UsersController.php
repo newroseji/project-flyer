@@ -3,6 +3,7 @@
 	namespace App\Http\Controllers;
 
 	use App\Flyer;
+	use App\Http\Requests\UserPasswordUpdateRequest;
 	use App\Http\Requests\UserUpdateRequest;
 	use App\User;
 	use Illuminate\Http\Request;
@@ -58,4 +59,31 @@
 
 			return redirect('/user/profile/' . $request->id );
 		}
+
+		public function pwUpdate(UserPasswordUpdateRequest $request) {
+
+			$user = User::findOrFail($request->id);
+
+			if (! \Auth::attempt(['email'=>$user->email,'password'=>$request->input('old_password'),'verified'=>true])) {
+
+
+				flash()->error("Sorry!", "Old password did not match.");
+
+				//dd($user->email, $request->input('password'));
+				if ($request->ajax()) {
+					return response(['message' => 'Password did not match.'], 403);
+
+				}
+
+				return redirect('user/profile/' . $request->id)->withInput($request->except(['old_password']));
+			}
+
+			$user->password = bcrypt($request->input('password'));
+			$user->save();
+
+			flash()->overlay("Success!", "Password updated successfully.");
+
+			return redirect('/user/profile/' . $request->id );
+		}
+
 	}

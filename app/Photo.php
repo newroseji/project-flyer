@@ -15,6 +15,9 @@
 
 		protected $file;
 
+		/**
+		 * Boot
+		 */
 		protected static function boot() {
 			static::creating(function ($photo) {
 				return $photo->upload();
@@ -23,6 +26,7 @@
 
 		/**
 		 * Photo's relationship to Flyer model.
+		 *
 		 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 		 */
 		public function flyer() {
@@ -46,7 +50,7 @@
 		 * @return string
 		 */
 		public function fileCaption() {
-			return strtok($this->file->getClientOriginalName(),'.');
+			return strtok($this->file->getClientOriginalName(), '.');
 		}
 
 		/**
@@ -104,7 +108,7 @@
 				->save($this->thumbnailPath());
 		}
 
-		public function delete(){
+		public function delete() {
 			\File::delete([
 				$this->photo_path,
 				$this->thumbnail_path

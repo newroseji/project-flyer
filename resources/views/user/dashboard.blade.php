@@ -2,6 +2,7 @@
 
 @section('content')
     <h2>Dashboard</h2>
+
     <div class="panel panel-default">
         <div class="panel-heading">
 
@@ -11,15 +12,26 @@
             </div>
         </div>
         <div class="panel-body">
-            <ul class="list-group">
-                @foreach($flyers as $flyer)
-                    <li class="list-group-item">
-                        <a href="flyers/{{$flyer->zip}}/{{$flyer->street}}">{{$flyer->street}}, {{$flyer->city}}, {{$flyer->zip}} {{$flyer->state}}</a>
-                @endforeach
-            </ul>
-            <div class="text-center">
-                {!! $flyers->appends(Request::except('page'))->render() !!}
-            </div>
+
+            @if(count($flyers)>0)
+
+                <ul class="list-group">
+                    @foreach($flyers as $flyer)
+                        <li class="list-group-item">
+                        <span>
+                        <a href="/flyers/{{$flyer->zip}}/{{$flyer->street}}">{{$flyer->street}}, {{$flyer->city}}
+                            , {{$flyer->zip}} {{$flyer->state}}</a>
+                            </span>
+                            <span class="pull-right">{{$flyer->updated_at}}</span>
+                        </li>
+                    @endforeach
+                </ul>
+                <div class="text-center">
+                    {!! $flyers->appends(Request::except('page'))->render() !!}
+                </div>
+            @else
+                <span class="badge badge-warning">No flyers found.</span>
+            @endif
         </div>
     </div>
 @stop

@@ -3,8 +3,11 @@
 @extends('app')
 @section('content')
 
-    <div class="container col-md-10 col-md-offset-1">
-        <h1>Create a flyer</h1>
+    <div class="row margin-top-20">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading">Create a Flyer</div>
+                <div class="panel-body">
 
 
         <form action="/flyers" method="POST">
@@ -116,8 +119,7 @@
                     <label for="description">Description:</label>
 
                     <textarea name="description" placeholder="Put a brief description about the house here..." rows="11"
-                              id="description" class="form-control" value="{{old('description')}}">
-                    </textarea>
+                              id="description" class="form-control" >{{old('description')}}</textarea>
                     @if ($errors->has('description'))
                         <span class="help-block">
                             <strong>{{ $errors->first('description') }}</strong>
@@ -131,13 +133,16 @@
             <div class="col-md-12">
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Create a flyer</button>
-
+                    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-save"></i> Create a flyer</button>
+                    <a href="{{ URL::previous() }}" class="btn btn-link" title="Cancel">cancel</a>
                 </div>
             </div>
 
         </form>
-
+</div>
+    </div>
+    </div>
+    </div>
 
 @stop
 

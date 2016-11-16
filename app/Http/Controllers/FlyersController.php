@@ -116,6 +116,10 @@
 
 			Flyer::locatedAt($zip, $street)->addPhoto($photo);
 
+			\App::make('Pusher')->trigger('pushPhotosChannel', 'projectFlyerPhotos', [
+				'photo_path'     => $photo->photo_path,
+				'thumbnail_path' => $photo->thumbnail_path
+			]);
 
 		}
 

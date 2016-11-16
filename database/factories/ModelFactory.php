@@ -45,3 +45,16 @@ $factory->define(App\Flyer::class, function (Faker\Generator $faker)
         'user_id'     => factory('App\User')->create()->id
     ];
 });
+
+	$factory->define(App\Photo::class, function (Faker\Generator $faker)
+	{
+		return [
+
+			'flyer_id'     => factory('App\Flyer')->create()->id,
+			'name'=>$faker->sentence,
+			'thumbnail_path'=>$faker->imageUrl(200,200),
+			'photo_path'=>$faker->imageUrl(800,800),
+			'caption'=>$faker->sentence
+
+		];
+	});

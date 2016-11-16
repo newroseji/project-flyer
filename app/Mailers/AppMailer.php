@@ -42,7 +42,8 @@ namespace App\Mailers;
 				$this->view,
 				$this->data,
 				function ($message) {
-					$message->from($this->from, 'Administratory')
+					$message->from($this->from, 'Administrator')
+						->subject("Email Confirmation required!")
 						->to($this->to);
 				}
 			);

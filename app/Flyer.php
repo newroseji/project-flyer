@@ -4,6 +4,7 @@
 
 	use Illuminate\Database\Eloquent\Model;
 	use Illuminate\Support\Facades\Auth;
+	use Carbon\Carbon;
 
 	class Flyer extends Model
 	{
@@ -18,6 +19,17 @@
 			'price',
 			'description',
 		];
+
+		/**
+		 * Create user_id while creating the User record.
+		 */
+		public static function boot() {
+			parent::boot();
+
+			static::creating(function ($flyer) {
+				$flyer->user_id = Auth::user()->id;
+			});
+		}
 
 		/**
 		 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -36,7 +48,13 @@
 			return $this->user_id == $user->id;
 		}
 
+		public function getUpdatedAtAttribute($updateAt) {
+			return Carbon::parse($updateAt)->diffForHumans();
+		}
+
 		/**
+		 * Mutator
+		 *
 		 * @param $price
 		 *
 		 * @return string
@@ -72,18 +90,6 @@
 		 */
 		public function photos() {
 			return $this->hasMany('App\Photo');
-		}
-
-
-		/**
-		 * Create user_id while creating the User record.
-		 */
-		public static function boot() {
-			parent::boot();
-
-			static::creating(function ($flyer) {
-				$flyer->user_id = Auth::user()->id;
-			});
 		}
 
 	}

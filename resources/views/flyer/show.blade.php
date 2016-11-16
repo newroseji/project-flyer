@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-md-12 photo-locker">
                 @foreach($flyer->photos->chunk(4) as $set)
-                    <div class="row">
+                    <div class="row" id="flyer-photos">
 
                         @foreach($set as $photo)
                             <div class="col-md-3">
@@ -51,7 +51,6 @@
         @if ( \Auth::user() && \Auth::user()->owns($flyer))
             <div class="row">
                 <form id="addPhotosForm"
-
                       action="{{ route('store_photo_path',[$flyer->zip,$flyer->street]) }}"
                       class="dropzone">
                     {!! csrf_field() !!}
@@ -76,5 +75,29 @@
             maxFilesize: 5,
             acceptedFiles: '.jpg,.jpeg,.png,.bmp'
         }
+    </script>
+
+    <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+    <script>
+
+        // Enable pusher logging - don't include this in production
+        // Pusher.logToConsole = true;
+
+        var pusher = new Pusher('7d423c90aa6bd61758af', {
+            encrypted: true
+        });
+
+        var channel = pusher.subscribe('pushPhotosChannel');
+        channel.bind('projectFlyerPhotos', function(data) {
+
+
+            var imgObject='<div class="col-md-3"><form method="POST" action="/photos/17"><input name="_method" value="DELETE" type="hidden">' +
+                    <?php csrf_field() ?>
+                    '<button class="glyphicon glyphicon-trash" type="submit" title="Delete"></button></form>' +
+                    '<a href="/' + data.photo_path + '" data-lity>' +
+                    '<img src="/' + data.thumbnail_path + '" alt="Tulips"></a></div>';
+
+            $('#flyer-photos').append(imgObject);
+        });
     </script>
 @stop

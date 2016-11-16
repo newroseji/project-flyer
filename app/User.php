@@ -37,6 +37,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+	/**
+	 * Boot
+	 */
 	public static function boot(){
 		parent::boot();
 

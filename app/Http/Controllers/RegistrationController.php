@@ -2,6 +2,7 @@
 
 	namespace App\Http\Controllers;
 
+	use App\Http\Requests\UserRegisterRequest;
 	use App\Mailers\AppMailer;
 	use App\User;
 	use Illuminate\Http\Request;
@@ -13,26 +14,7 @@
 			return view('auth.register');
 		}
 
-		public function postRegister(Request $request, AppMailer $mailer) {
-
-			// validate the request
-			$this->validate($request,
-				[
-					'username' => 'required|min:3|max:50|unique:users',
-					'firstname' => 'required|min:3|max:50',
-					'middlename' => 'max:20',
-					'lastname'  => 'required|min:3|max:50',
-					'address1'  => 'max:60',
-					'address2'  => 'max:30',
-					'city'      => 'max:50',
-					'state'     => 'max:2',
-					'zip'       => 'max:55',
-					'country'   => 'max:50',
-					'email'     => 'required|email',
-					'password'  => 'required|min:6|max:50|confirmed',
-					'password_confirmation'=>'required|min:6|max:50'
-
-				]);
+		public function postRegister(UserRegisterRequest $request, AppMailer $mailer) {
 
 			// create the user
 			$user = User::create($request->all());
@@ -41,10 +23,10 @@
 			$mailer->sendEmailConfirmationTo($user);
 
 			// flashes message
-			flash()->overlay("Registered!","Now, please confirm your email address.");
+			flash()->overlay("Registered!","Now, please confirm your " . $request->email . " email.");
 
 			// redirect to login
-			return redirect('login');
+			return back();
 		}
 
 		public function confirmEmail($token) {

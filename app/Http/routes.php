@@ -11,6 +11,8 @@
 	|
 	*/
 
+
+
 	Route::get('/', function () {
 		return view('welcome');
 	});
@@ -30,6 +32,11 @@
 	Route::get('user/profile/{user}', 'UsersController@profile');
 	Route::get('user/edit/{user}', 'UsersController@edit');
 	Route::post('user/update', 'UsersController@update');
+	Route::post('user/pw', 'UsersController@pwUpdate');
+
+	Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+	Route::post('password/reset', 'Auth\PasswordController@reset');
+	Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
 
 	Route::get('flyers', 'FlyersController@index');
 
@@ -44,6 +51,12 @@
 	Route::post('flyers/update', 'FlyersController@update');
 
 
-	Route::post('flyers/{zip}/{street}/photos', ['as'=>'store_photo_path','uses'=>'FlyersController@addPhoto']);
+	Route::post('flyers/{zip}/{street}/photos', ['as' => 'store_photo_path', 'uses' => 'FlyersController@addPhoto']);
 
-	Route::delete('photos/{id}','PhotosController@destroy');
+	Route::delete('photos/{id}', 'PhotosController@destroy');
+
+
+	App::bind('Pusher', function () {
+		return new Pusher(env('PUSHER_PUBLIC'), env('PUSHER_SECRET'), env('PUSHER_APP_ID'));
+	});
+

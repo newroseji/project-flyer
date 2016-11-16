@@ -36,7 +36,7 @@
 
 			flash()->error("Oops!","Could not sign you in.");
 
-			return redirect()->back();
+			return redirect('login')->withInput($request->except('password'));
 
 
 		}
