@@ -1,4 +1,4 @@
-@extends('app')
+@extends('debug.app')
 @section('page-title','Welcome')
 @section('carousel')
     <!-- Carousel

@@ -1,6 +1,6 @@
 @inject('countries','App\Http\Utilities\Country')
 @inject('states','App\Http\Utilities\State')
-@extends('app')
+@extends('layouts.layout')
 @section('page-title','Show Flyer')
 @section("styles")
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css" rel="stylesheet">
@@ -72,7 +72,7 @@
     <script>
         Dropzone.options.addPhotosForm = {
             paramName: 'photo',
-            maxFilesize: 5,
+            maxFilesize: 10,
             acceptedFiles: '.jpg,.jpeg,.png,.bmp'
         }
     </script>

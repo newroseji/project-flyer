@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.layout')
 @section('page-title','List of Flyers')
 @section('content')
 

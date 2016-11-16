@@ -1,6 +1,6 @@
 @inject('countries','App\Http\Utilities\Country')
 @inject('states','App\Http\Utilities\State')
-@extends('app')
+@extends('layouts.layout')
 @section('page-title','Create a new flyer')
 @section('content')
 

@@ -1,4 +1,5 @@
-@extends('app')
+@extends('layouts.layout')
+@section('page-title','Password reset')
 @section('content')
 
     <div class="row margin-top-20">

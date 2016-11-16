@@ -28,7 +28,7 @@
 				)
 			);
 
-			view()->composer(['app'], function ($view) use ($navItems) {
+			view()->composer(['app','debug.app','release.app'], function ($view) use ($navItems) {
 				$view->with('navItems', $navItems);
 			});
 		}

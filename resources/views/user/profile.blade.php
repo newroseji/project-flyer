@@ -1,6 +1,6 @@
 @inject('countries','App\Http\Utilities\Country')
 @inject('states','App\Http\Utilities\State')
-@extends('app')
+@extends('debug.app')
 @section('page-title','User Profile')
 @section('content')
     <br/>

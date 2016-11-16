@@ -1,6 +1,6 @@
 @inject('countries','App\Http\Utilities\Country')
 @inject('states','App\Http\Utilities\State')
-@extends('app')
+@extends('debug.app')
 @section('content')
 
     <div class="container col-md-10 col-md-offset-1">

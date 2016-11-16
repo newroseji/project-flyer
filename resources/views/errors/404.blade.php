@@ -1,4 +1,5 @@
-@extends('app')
+@extends('layouts.layout')
+@section('page-title','404! Page not found.')
 @section('content')
 
 

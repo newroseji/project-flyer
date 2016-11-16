@@ -1,5 +1,5 @@
-@extends('app')
-
+@extends('layouts.layout')
+@section('page-title','Email access permission')
 <!-- Main Content -->
 @section('content')
 

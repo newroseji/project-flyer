@@ -23,13 +23,13 @@
 		/**
 		 * Create user_id while creating the User record.
 		 */
-		public static function boot() {
+		/*public static function boot() {
 			parent::boot();
 
 			static::creating(function ($flyer) {
 				$flyer->user_id = Auth::user()->id;
 			});
-		}
+		}*/
 
 		/**
 		 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
