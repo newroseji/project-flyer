@@ -117,6 +117,7 @@
 			Flyer::locatedAt($zip, $street)->addPhoto($photo);
 
 			\App::make('Pusher')->trigger('pushPhotosChannel', 'projectFlyerPhotos', [
+				'id'             => $photo->id,
 				'photo_path'     => $photo->photo_path,
 				'thumbnail_path' => $photo->thumbnail_path
 			]);
@@ -168,7 +169,7 @@
 
 				}
 				if (Flyer::where('zip', 'like', '%' . $key . '%')->exists()) {
-					$contain =  Flyer::where('zip', 'like', '%' . $key . '%')->get()->toArray();
+					$contain = Flyer::where('zip', 'like', '%' . $key . '%')->get()->toArray();
 
 					if (count($contain) > 1) {
 
@@ -193,7 +194,7 @@
 					}
 				}
 				if (Flyer::where('country', 'like', '%' . $key . '%')->exists()) {
-					$contain =  Flyer::where('country', 'like', '%' . $key . '%')->get()->toArray();
+					$contain = Flyer::where('country', 'like', '%' . $key . '%')->get()->toArray();
 					if (count($contain) > 1) {
 
 						foreach ($contain as $kk => $vv) {
@@ -205,7 +206,7 @@
 					}
 				}
 				if (Flyer::where('description', 'like', '%' . $key . '%')->exists()) {
-					$contain =  Flyer::where('description', 'like', '%' . $key . '%')->get()->toArray();
+					$contain = Flyer::where('description', 'like', '%' . $key . '%')->get()->toArray();
 					if (count($contain) > 1) {
 
 						foreach ($contain as $kk => $vv) {
@@ -219,10 +220,11 @@
 			endforeach;
 
 			$uniq = array();
-			foreach($container['results'] as $k=>$v) if(!isset($uniq[$v['street']])) $uniq[$v['street']] = $v;
+			foreach ($container['results'] as $k => $v) if (! isset($uniq[ $v['street'] ])) $uniq[ $v['street'] ] = $v;
 			$uniq = array_values($uniq);
 
-			$container['results']= $uniq;
+			$container['results'] = $uniq;
+
 			//dd($container);
 
 			return view('pages.search', compact('container'));

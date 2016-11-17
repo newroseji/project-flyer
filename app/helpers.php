@@ -33,11 +33,13 @@ function link_to($body, $path, $type){
 	}
 
 	return <<<EOT
-<form method="POST" action="{$path}">
+
+<form method="POST" action="{$path}"  class="col-md-3 col-sm-3">
 <input type='hidden' name='_method' value='{$type}'>
 $csrf
 <button class="glyphicon glyphicon-trash" type="submit" title="Delete"></button>
 </form>
+
 EOT;
 
 }

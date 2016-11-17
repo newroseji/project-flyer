@@ -14,6 +14,8 @@
 		protected $fillable = ['name', 'thumbnail_path', 'photo_path', 'caption'];
 
 		protected $file;
+		protected static $filename;
+		protected static $thumbnailnamePath;
 
 		/**
 		 * Boot
@@ -37,12 +39,14 @@
 			$photo = new static;
 
 			$photo->file = $file;
+			self::$filename= $photo->fileName();
+			self::$thumbnailnamePath = $photo->thumbnailPath();
 
 			return $photo->fill([
-				'name'           => $photo->fileName(),
+				'name'           => self::$filename,
 				'caption'        => $photo->fileCaption(),
 				'photo_path'     => $photo->filePath(),
-				'thumbnail_path' => $photo->thumbnailPath()
+				'thumbnail_path' => self::$thumbnailnamePath
 			]);
 		}
 
@@ -91,7 +95,7 @@
 		 * @return $this
 		 */
 		public function upload() {
-			$this->file->move($this->baseDir(), $this->fileName());
+			$this->file->move($this->baseDir(), self::$filename);
 
 			$this->makeThumbnail();
 
@@ -105,7 +109,7 @@
 		protected function makeThumbnail() {
 			\Image::make($this->filePath())
 				->fit(200)
-				->save($this->thumbnailPath());
+				->save(self::$thumbnailnamePath);
 		}
 
 		public function delete() {

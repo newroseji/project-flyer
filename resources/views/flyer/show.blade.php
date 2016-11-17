@@ -25,12 +25,12 @@
     <div class="col-md-9">
 
         <div class="row">
-            <div class="col-md-12 photo-locker">
+            <div class="col-md-12 photo-locker" id="flyer-photos">
                 @foreach($flyer->photos->chunk(4) as $set)
-                    <div class="row" id="flyer-photos">
+
 
                         @foreach($set as $photo)
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-sm-4">
                                 @if ( \Auth::user() && \Auth::user()->owns($flyer))
                                     {!! link_to('Delete',"/photos/{$photo->id}",'DELETE') !!}
                                 @endif
@@ -42,7 +42,7 @@
                             </div>
                         @endforeach
 
-                    </div>
+
                     <hr/>
                 @endforeach
             </div>
@@ -91,11 +91,11 @@
         channel.bind('projectFlyerPhotos', function(data) {
 
 
-            var imgObject='<div class="col-md-3"><form method="POST" action="/photos/17"><input name="_method" value="DELETE" type="hidden">' +
+            var imgObject='<div class="col-md-3 col-sm-4"><form method="POST" class="col-md-3 col-sm-3" action="/photos/' + data.id + '"><input name="_method" value="DELETE" type="hidden">' +
                     <?php csrf_field() ?>
                     '<button class="glyphicon glyphicon-trash" type="submit" title="Delete"></button></form>' +
                     '<a href="/' + data.photo_path + '" data-lity>' +
-                    '<img src="/' + data.thumbnail_path + '" alt="Tulips"></a></div>';
+                    '<img src="/' + data.thumbnail_path + '" alt=""></a></div>';
 
             $('#flyer-photos').append(imgObject);
         });

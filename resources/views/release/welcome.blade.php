@@ -13,21 +13,19 @@
         <div class="carousel-inner" role="listbox">
             <div class="item active">
                 <img class="first-slide"
-                     src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                     src="/images/photos/0d35fcef4af0a1d09426f7b4646f132eca02510f.jpg"
                      alt="First slide">
                 <div class="container">
                     <div class="carousel-caption">
                         <h1>Example headline.</h1>
-                        <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous"
-                            Glyphicon buttons on the left and right might not load/display properly due to web browser
-                            security rules.</p>
+                        <p>Interesting building!</p>
                         <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
                     </div>
                 </div>
             </div>
             <div class="item">
                 <img class="second-slide"
-                     src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                     src="/images/photos/4c48245a7b158551c1bc3a2b33da6b85a954486b.jpg"
                      alt="Second slide">
                 <div class="container">
                     <div class="carousel-caption">
@@ -40,7 +38,7 @@
             </div>
             <div class="item">
                 <img class="third-slide"
-                     src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                     src="/images/photos/64f1ae9d47820214d4e66ca672cc312ab885888e.jpg"
                      alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption">

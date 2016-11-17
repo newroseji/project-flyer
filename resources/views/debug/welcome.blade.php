@@ -13,7 +13,7 @@
         <div class="carousel-inner" role="listbox">
             <div class="item active">
                 <img class="first-slide"
-                     src="/images/photos/518980f4f3ddc8f28567d65737c341058f5efec8.jpg"
+                     src="/images/photos/0d35fcef4af0a1d09426f7b4646f132eca02510f.jpg"
                      alt="First slide">
                 <div class="container">
                     <div class="carousel-caption">
@@ -25,7 +25,7 @@
             </div>
             <div class="item">
                 <img class="second-slide"
-                     src="/images/photos/7f65f6c66653d693627cb0abaef61d9ff65213aa.jpg"
+                     src="/images/photos/4c48245a7b158551c1bc3a2b33da6b85a954486b.jpg"
                      alt="Second slide">
                 <div class="container">
                     <div class="carousel-caption">
@@ -38,7 +38,7 @@
             </div>
             <div class="item">
                 <img class="third-slide"
-                     src="/images/photos/87d983c0a77ba9f91f737c5ce7f59169ff9ef5fb.jpg"
+                     src="/images/photos/64f1ae9d47820214d4e66ca672cc312ab885888e.jpg"
                      alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption">
