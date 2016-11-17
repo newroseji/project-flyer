@@ -11,7 +11,8 @@
     <div class="col-md-3 margin-top-20">
         <h3>{{ $flyer->street }}</h3>
         @if ( \Auth::user() && \Auth::user()->owns($flyer))
-            <a href="/flyers/{{$flyer->id}}/edit" class="pull-right" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+            <a href="/flyers/{{$flyer->id}}/edit" class="pull-right" title="Edit"><i
+                        class="glyphicon glyphicon-pencil"></i></a>
         @endif
 
         <h4>${{number_format($flyer->price) }}</h4>
@@ -25,25 +26,25 @@
     <div class="col-md-9">
 
         <div class="row">
-            <div class="col-md-12 photo-locker" id="flyer-photos">
+            <div class="col-md-12 photo-locker margin-top-20" id="flyer-photos">
                 @foreach($flyer->photos->chunk(4) as $set)
 
 
-                        @foreach($set as $photo)
-                            <div class="col-md-3 col-sm-4 photo-locker-photo">
-                                @if ( \Auth::user() && \Auth::user()->owns($flyer))
-                                    {!! link_to('Delete',"/photos/{$photo->id}",'DELETE') !!}
-                                @endif
+                    @foreach($set as $photo)
+                        <div class="col-md-3 col-sm-4 photo-locker-photo">
+                            @if ( \Auth::user() && \Auth::user()->owns($flyer))
+                                {!! link_to('Delete',"/photos/{$photo->id}",'DELETE',"col-md-3 col-sm-3 delFrm") !!}
+                            @endif
 
-                                <a href="/{{$photo->photo_path}}" data-lity>
-                                    <img src="/{{$photo->thumbnail_path}}" alt="{{$photo->caption}}"/>
-                                </a>
+                            <a href="/{{$photo->photo_path}}" data-lity>
+                                <img src="/{{$photo->thumbnail_path}}" alt="{{$photo->caption}}"/>
+                            </a>
 
-                            </div>
-                        @endforeach
+                        </div>
+                    @endforeach
 
 
-                    <hr/>
+
                 @endforeach
             </div>
         </div>
@@ -88,16 +89,46 @@
         });
 
         var channel = pusher.subscribe('pushPhotosChannel');
-        channel.bind('projectFlyerPhotos', function(data) {
+        channel.bind('projectFlyerPhotos', function (data) {
 
 
-            var imgObject='<div class="col-md-3 col-sm-4"><form method="POST" class="col-md-3 col-sm-3" action="/photos/' + data.id + '"><input name="_method" value="DELETE" type="hidden">' +
-                    <?php csrf_field() ?>
-                    '<button class="glyphicon glyphicon-trash" type="submit" title="Delete"></button></form>' +
+            var imgObject = '<div class="col-md-3 col-sm-4 photo-locker-photo"><form method="POST" class="col-md-3 col-sm-3 delFrm" action="/photos/' + data.id + '"><input name="_method" value="DELETE" type="hidden">' +
+                    '<input type="hidden" name="_token" value="<?= csrf_token() ?>">' +
+                            '<button class="glyphicon glyphicon-trash" type="submit" title="Delete"></button></form>' +
                     '<a href="/' + data.photo_path + '" data-lity>' +
                     '<img src="/' + data.thumbnail_path + '" alt=""></a></div>';
 
             $('#flyer-photos').append(imgObject);
+        });
+    </script>
+
+    <script>
+        $('.delFrm').submit(function (event) {
+            swal({
+                        title: "Are you sure?",
+                        text: "You will not be able to recover this imaginary file!",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "Yes, delete it!",
+                        cancelButtonText: "No, cancel please!",
+                        closeOnConfirm: false,
+                        closeOnCancel: false
+                    },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            swal("Deleted!", "The photo has been deleted.", "success");
+                            $('.delFrm').submit();
+                        }
+                        else {
+                            console.log('activated');
+                            swal("Cancelled", "The photo is safe.", "error");
+                            event.preventDefault();
+                        }
+
+                    });
+
+
         });
     </script>
 @stop

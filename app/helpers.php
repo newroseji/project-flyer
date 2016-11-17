@@ -15,7 +15,7 @@ function flash($title = null, $message = null)
 
 }
 
-function link_to($body, $path, $type){
+function link_to($body, $path, $type,$classes){
 
 	$csrf = csrf_field();
 
@@ -34,7 +34,7 @@ function link_to($body, $path, $type){
 
 	return <<<EOT
 
-<form method="POST" action="{$path}"  class="col-md-3 col-sm-3">
+<form method="POST" action="{$action}"  class="{$classes}">
 <input type='hidden' name='_method' value='{$type}'>
 $csrf
 <button class="glyphicon glyphicon-trash" type="submit" title="Delete"></button>

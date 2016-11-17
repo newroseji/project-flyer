@@ -15,17 +15,42 @@
 
             @if(count($flyers)>0)
 
-                <ul class="list-group">
-                    @foreach($flyers as $flyer)
-                        <li class="list-group-item">
-                        <span>
-                        <a href="/flyers/{{$flyer->zip}}/{{$flyer->street}}">{{$flyer->street}}, {{$flyer->city}}
-                            , {{$flyer->zip}} {{$flyer->state}}</a>
-                            </span>
-                            <span class="pull-right">{{$flyer->updated_at}}</span>
-                        </li>
-                    @endforeach
-                </ul>
+
+                @foreach($flyers as $flyer)
+
+                    <div class="row">
+                        <div class="col-md-7 col-sm-5 col-xs-6">
+                            <a href="/flyers/{{$flyer->zip}}/{{$flyer->street}}">{{$flyer->street}}, {{$flyer->city}}
+                                , {{$flyer->zip}} {{$flyer->state}}
+
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-1" >
+                            @if (count($flyer->photos)>0)
+                                <span title="{{count($flyer->photos)}} photo(s)">
+                                {{count($flyer->photos)}}</span> <span class="hidden-xs"> photos</span>
+                            @endif
+                        </div>
+
+                        <div class="col-md-2 col-sm-3 col-xs-4 hidden-xs ">
+
+                            {{$flyer->updated_at}}
+                        </div>
+
+                        <div class="col-md-1 col-sm-2 col-xs-4">
+
+
+                            <a href="/flyers/{{$flyer->id}}/edit" title="Edit"><i
+                                        class="glyphicon glyphicon-pencil"></i></a>
+                            &nbsp;
+                            <a href="/flyers/{{$flyer->id}}/delete" title="Delete"><i
+                                        class="glyphicon glyphicon-trash"></i></a>
+
+
+                        </div>
+                    </div>
+                @endforeach
+
                 <div class="text-center">
                     {!! $flyers->appends(Request::except('page'))->render() !!}
                 </div>
