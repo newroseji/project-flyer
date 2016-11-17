@@ -9,11 +9,13 @@
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
             <li data-target="#myCarousel" data-slide-to="1"></li>
             <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="item active">
                 <img class="first-slide"
-                     src="/images/photos/0d35fcef4af0a1d09426f7b4646f132eca02510f.jpg"
+                     src="/images/carousel/house1.jpg"
                      alt="First slide">
                 <div class="container">
                     <div class="carousel-caption">
@@ -25,7 +27,7 @@
             </div>
             <div class="item">
                 <img class="second-slide"
-                     src="/images/photos/4c48245a7b158551c1bc3a2b33da6b85a954486b.jpg"
+                     src="/images/carousel/house2.jpg"
                      alt="Second slide">
                 <div class="container">
                     <div class="carousel-caption">
@@ -38,7 +40,33 @@
             </div>
             <div class="item">
                 <img class="third-slide"
-                     src="/images/photos/64f1ae9d47820214d4e66ca672cc312ab885888e.jpg"
+                     src="/images/carousel/house3.jpg"
+                     alt="Third slide">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>One more for good measure.</h1>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img class="third-slide"
+                     src="/images/carousel/house4.jpg"
+                     alt="Third slide">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>One more for good measure.</h1>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img class="third-slide"
+                     src="/images/carousel/house5.jpg"
                      alt="Third slide">
                 <div class="container">
                     <div class="carousel-caption">
@@ -51,11 +79,11 @@
             </div>
         </div>
         <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="icon-prev" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
         <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="icon-next" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
     </div><!-- /.carousel -->
