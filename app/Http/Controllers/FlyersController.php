@@ -134,6 +134,8 @@
 
 			$key = $request->input('q');
 
+			$key=empty($key)?"Whitehouse":$key;
+
 			$container = array(
 				'key'     => $key,
 				'results' => array()
@@ -224,8 +226,6 @@
 			$uniq = array_values($uniq);
 
 			$container['results'] = $uniq;
-
-			//dd($container);
 
 			return view('pages.search', compact('container'));
 

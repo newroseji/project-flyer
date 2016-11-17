@@ -28,8 +28,8 @@
             <ul class="nav navbar-nav navbar-right">
 
                 <li>
-                    <form class="navbar-form" role="search" method="POST" action="/query/search">
-                        {{ csrf_field() }}
+                    <form class="navbar-form" role="search" method="GET" action="/search">
+
                         <div class="input-group">
                             <input type="text" class="form-control input-sm"
                                    placeholder="Search"

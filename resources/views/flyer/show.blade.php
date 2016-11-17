@@ -30,7 +30,7 @@
 
 
                         @foreach($set as $photo)
-                            <div class="col-md-3 col-sm-4">
+                            <div class="col-md-3 col-sm-4 photo-locker-photo">
                                 @if ( \Auth::user() && \Auth::user()->owns($flyer))
                                     {!! link_to('Delete',"/photos/{$photo->id}",'DELETE') !!}
                                 @endif

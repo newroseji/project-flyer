@@ -50,7 +50,7 @@
 
 	Route::post('flyers/update', 'FlyersController@update');
 
-	Route::post('query/search', 'FlyersController@search');
+	Route::get('search', 'FlyersController@search');
 
 	Route::post('flyers/{zip}/{street}/photos', ['as' => 'store_photo_path', 'uses' => 'FlyersController@addPhoto']);
 
