@@ -7,8 +7,8 @@
 @stop
 @section('content')
 
-    <br/>
-    <div class="col-md-3">
+
+    <div class="col-md-3 margin-top-20">
         <h3>{{ $flyer->street }}</h3>
         @if ( \Auth::user() && \Auth::user()->owns($flyer))
             <a href="/flyers/{{$flyer->id}}/edit" class="pull-right" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
