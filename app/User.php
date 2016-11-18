@@ -49,11 +49,12 @@ class User extends Authenticatable
 	}
 
 	/**
+	 * @deprecated because it bcrypt twice
 	 * @param $password
 	 */
-	public function setPasswordAttribute($password){
+	/*public function setPasswordAttribute($password){
 		$this->attributes['password']= bcrypt($password);
-	}
+	}*/
 
 	/**
 	 * Confirm email after registration.

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-App="myApp">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +40,8 @@
 
     @yield("styles")
 </head>
-<body>
+<body ng-controller="AppMainController">
+
 <div class="navbar-wrapper">
     <div class="container">
 
@@ -61,6 +62,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="/assets/js/jquery/1.12.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 <script src="/assets/js/holder.min.js"></script>
@@ -68,9 +70,11 @@
 <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
 <script src="/assets/sweetalert2/dist/sweetalert2.min.js"></script>
-
+<script src="/assets/sweetalert2/dist/ng-sweet-alert.js"></script>
 <script src="/assets/lity.2.2.0/lity.min.js"></script>
 
+
+<script src="/assets/js/app.js"></script>
 @yield("scripts")
 @include("flashes._sweetflash")
 </body>

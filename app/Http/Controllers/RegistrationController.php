@@ -17,7 +17,23 @@
 		public function postRegister(UserRegisterRequest $request, AppMailer $mailer) {
 
 			// create the user
-			$user = User::create($request->all());
+			$user = User::create(
+				[
+					'username'=> $request->input('username'),
+					'firstname'=> $request->input('firstname'),
+					'middlename'=> $request->input('middlename'),
+					'lastname'=> $request->input('lastname'),
+					'address1'=> $request->input('address1'),
+					'address2'=> $request->input('address2'),
+					'city'=> $request->input('city'),
+					'state'=> $request->input('state'),
+					'zip'=> $request->input('zip'),
+					'country'=> $request->input('country'),
+					'email'=> $request->input('email'),
+					'password'=> bcrypt($request->input('password'))
+				]
+
+			);
 
 			// email them a confirmation link
 			$mailer->sendEmailConfirmationTo($user);

@@ -37,15 +37,15 @@
                             {{$flyer->updated_at}}
                         </div>
 
-                        <div class="col-md-1 col-sm-2 col-xs-4">
+                        <div class="col-md-1 col-sm-2 col-xs-5">
 
-
+<span class="pull-right">
                             <a href="/flyers/{{$flyer->id}}/edit" title="Edit"><i
                                         class="glyphicon glyphicon-pencil"></i></a>
                             &nbsp;
                             <a href="/flyers/{{$flyer->id}}/delete" title="Delete"><i
                                         class="glyphicon glyphicon-trash"></i></a>
-
+</span>
 
                         </div>
                     </div>

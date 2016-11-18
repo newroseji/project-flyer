@@ -42,9 +42,6 @@
 
                         </div>
                     @endforeach
-
-
-
                 @endforeach
             </div>
         </div>
@@ -102,33 +99,4 @@
         });
     </script>
 
-    <script>
-        $('.delFrm').submit(function (event) {
-            swal({
-                        title: "Are you sure?",
-                        text: "You will not be able to recover this imaginary file!",
-                        type: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "Yes, delete it!",
-                        cancelButtonText: "No, cancel please!",
-                        closeOnConfirm: false,
-                        closeOnCancel: false
-                    },
-                    function (isConfirm) {
-                        if (isConfirm) {
-                            swal("Deleted!", "The photo has been deleted.", "success");
-                            $('.delFrm').submit();
-                        }
-                        else {
-                            console.log('activated');
-                            swal("Cancelled", "The photo is safe.", "error");
-                            event.preventDefault();
-                        }
-
-                    });
-
-
-        });
-    </script>
 @stop
